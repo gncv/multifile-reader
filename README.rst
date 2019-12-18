@@ -48,3 +48,10 @@ Or to read big files in chunks:
             content_binary += chunk
             # or do something else with the chunk
 
+
+Contributors
+------------
+
+Gencove_
+
+.. _Gencove: https://gencove.com/
