@@ -4,9 +4,13 @@ import os
 
 # pylint: disable=R0205
 class MultiFileReader(object):
-    """File-like object that reads multi-files as if they are one file."""
+    """File-like object that reads multi-files as if they are one file.
 
-    def __init__(self, files):
+    Args:
+        files (list): list of local file paths or urls
+    """
+
+    def __init__(self, files, request_headers=None):
         if isinstance(files, str):
             self._files = (files,)
         else:
@@ -39,7 +43,7 @@ class MultiFileReader(object):
             self._file_idx = 0
 
     def nextfile(self):
-        """Get next file if there is one."""
+        """Get next file if there is one and set it to self._file attribute."""
         prev_file = self._file
         self._file = None
         if prev_file:
@@ -66,7 +70,11 @@ class MultiFileReader(object):
             return -1
 
     def get_size(self):
-        """Returns combined size of all files provided."""
+        """Returns combined size of all files provided.
+
+        Returns:
+            int: size of all files provided in bytes
+        """
         return sum(self._map_sizes.values())
 
     def read(self, size=None):
