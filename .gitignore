@@ -3,4 +3,10 @@
 .venv
 .eggs
 *.egg-info
+.coverage
+
+# IDE/editor
 .idea
+*.sublime-workspace
+*.sublime-project
+.vscode
