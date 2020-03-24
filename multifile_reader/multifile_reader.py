@@ -18,9 +18,7 @@ class MultiFileReader(object):
 
         self._file = None
         self._file_idx = 0
-        self._map_sizes = {
-            file_path: os.path.getsize(file_path) for file_path in self._files
-        }
+        self._map_sizes = self._get_map_sizes()
         self._read_files_offset = {file_path: 0 for file_path in self._files}
 
     def __del__(self):
@@ -34,6 +32,16 @@ class MultiFileReader(object):
 
     def __iter__(self):  # pylint: disable=E0301
         return self
+
+    def _get_map_sizes(self):
+        """Get size of each file.
+
+        Returns:
+            dict: file path as key, file size in bytes as value
+        """
+        return {
+            file_path: os.path.getsize(file_path) for file_path in self._files
+        }
 
     def close(self):
         """Close file and clear state."""
