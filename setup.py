@@ -14,14 +14,15 @@ def version():
 
 
 setup(
-    name='multifile-reader',
+    name="multifile-reader",
     version=version(),
     packages=find_packages(exclude=["tests"]),
-    url='',
-    license='MIT',
-    author='Altonotch',
-    author_email='info@altonotch.com',
-    description='File-like object that allows to read multiple files '
-                'as if they are one',
+    url="",
+    license="MIT",
+    author="Altonotch",
+    author_email="info@altonotch.com",
+    description="File-like object that allows to read multiple files "
+    "as if they are one",
     package_data={"multifile_reader": ["version/*"]},
+    install_requires=["requests>=2.23.0",],
 )
