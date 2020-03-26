@@ -1,5 +1,6 @@
 """File like object that reads multiple files as if they are one file."""
 import os
+from .utils import get_online_file_size, is_url
 
 
 # pylint: disable=R0205
@@ -8,6 +9,7 @@ class MultiFileReader(object):
 
     Args:
         files (list): list of local file paths or urls
+        request_headers (dict): headers used when fetching online files
     """
 
     def __init__(self, files, request_headers=None):
@@ -16,6 +18,7 @@ class MultiFileReader(object):
         else:
             self._files = files
 
+        self._request_headers = request_headers
         self._file = None
         self._file_idx = 0
         self._map_sizes = self._get_map_sizes()
@@ -39,9 +42,17 @@ class MultiFileReader(object):
         Returns:
             dict: file path as key, file size in bytes as value
         """
-        return {
-            file_path: os.path.getsize(file_path) for file_path in self._files
-        }
+        file_sizes = {}
+
+        for file_path in self._files:
+            if is_url(file_path):
+                file_sizes[file_path] = get_online_file_size(
+                    file_path, self._request_headers
+                )
+            else:
+                file_sizes[file_path] = os.path.getsize(file_path)
+
+        return file_sizes
 
     def close(self):
         """Close file and clear state."""
