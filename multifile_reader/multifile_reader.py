@@ -134,8 +134,8 @@ class MultiFileReader(object):
             # pylint: disable=C0330
             if (
                 not self._file
-                or self._read_files_offset[self._file.name]
-                == self._map_sizes[self._file.name]
+                or self._read_files_offset[self.filename]
+                == self._map_sizes[self.filename]
             ):
                 self.nextfile()
                 continue
@@ -147,11 +147,16 @@ class MultiFileReader(object):
 
     def _read(self, size):
         unread = (
-            self._map_sizes[self._file.name]
-            - self._read_files_offset[self._file.name]
+            self._map_sizes[self.filename]
+            - self._read_files_offset[self.filename]
         )
         length = min(size, unread)
-        self._file.seek(self._read_files_offset[self._file.name])
-        buf = self._file.read(length)
-        self._read_files_offset[self._file.name] += length
+
+        if self._url:
+            buf = self._file.read()
+        else:
+            self._file.seek(self._read_files_offset[self.filename])
+            buf = self._file.read(length)
+
+        self._read_files_offset[self.filename] += length
         return buf
