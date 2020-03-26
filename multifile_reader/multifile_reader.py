@@ -1,6 +1,6 @@
 """File like object that reads multiple files as if they are one file."""
 import os
-from .utils import get_online_file_size, is_url
+from .utils import get_online_file_size, get_streamed_online_file, is_url
 
 
 # pylint: disable=R0205
@@ -20,6 +20,7 @@ class MultiFileReader(object):
 
         self._request_headers = request_headers
         self._file = None
+        self._url = None
         self._file_idx = 0
         self._map_sizes = self._get_map_sizes()
         self._read_files_offset = {file_path: 0 for file_path in self._files}
@@ -70,7 +71,13 @@ class MultiFileReader(object):
             self._file_idx += 1
 
         try:
-            self._file = open(self._files[self._file_idx], "rb")
+            current_file_path = self._files[self._file_idx]
+            if is_url(current_file_path):
+                self._url = current_file_path
+                self._file = get_streamed_online_file(current_file_path, self._request_headers)
+            else:
+                self._url = None
+                self._file = open(current_file_path, "rb")
         except IndexError:
             pass
 
