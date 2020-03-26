@@ -1,3 +1,4 @@
+"""Various utils used for MultiFileReader."""
 from urllib.parse import urlparse
 
 import requests

@@ -94,8 +94,7 @@ class MultiFileReader(object):
         """
         if self._url:
             return self._url
-        else:
-            return self._file.name
+        return self._file.name
 
     def fileno(self):
         """Returns fileno of the current file."""
