@@ -1,4 +1,5 @@
 from urllib.parse import urlparse
+
 import requests
 
 from .exceptions import MultiFileReaderException

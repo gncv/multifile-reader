@@ -1,5 +1,6 @@
 """File like object that reads multiple files as if they are one file."""
 import os
+
 from .utils import get_online_file_size, get_streamed_online_file, is_url
 
 

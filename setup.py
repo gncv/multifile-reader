@@ -24,5 +24,5 @@ setup(
     description="File-like object that allows to read multiple files "
     "as if they are one",
     package_data={"multifile_reader": ["version/*"]},
-    install_requires=["requests>=2.23.0",],
+    install_requires=["requests>=2.23.0", ],
 )
