@@ -81,9 +81,18 @@ class MultiFileReader(object):
         except IndexError:
             pass
 
+    @property
     def filename(self):
-        """Returns filename of the current file."""
-        return self._file.name
+        """Returns filename of the current file.
+
+        Returns:
+            str: for local files this is full local path, for online files it
+                 is the original url
+        """
+        if self._url:
+            return self._url
+        else:
+            return self._file.name
 
     def fileno(self):
         """Returns fileno of the current file."""
