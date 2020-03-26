@@ -35,7 +35,9 @@ def make_streamed_get_request(url, headers=None):
         MultiFileReaderException: error communicating with the server
     """
     try:
-        response = requests.get(url, headers=headers, allow_redirects=True, stream=True)
+        response = requests.get(
+            url, headers=headers, allow_redirects=True, stream=True
+        )
         response.raise_for_status()
     except requests.exceptions.HTTPError:
         raise MultiFileReaderException(
@@ -44,7 +46,8 @@ def make_streamed_get_request(url, headers=None):
         )
     except requests.exceptions.RequestException:
         raise MultiFileReaderException(
-            "Unable to determine size of file at %s Server failed to respond." % url
+            "Unable to determine size of file at %s Server failed to respond."
+            % url
         )
 
     return response
@@ -70,7 +73,8 @@ def get_online_file_size(url, headers=None):
         return int(size)
     except (TypeError, ValueError):
         raise MultiFileReaderException(
-            "Size %s returned for file %s was not a valid number." % (size, url)
+            "Size %s returned for file %s was not a valid number."
+            % (size, url)
         )
 
 

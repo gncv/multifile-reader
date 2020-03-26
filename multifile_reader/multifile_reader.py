@@ -148,7 +148,10 @@ class MultiFileReader(object):
         return buf
 
     def _read(self, size):
-        unread = self._map_sizes[self.filename] - self._read_files_offset[self.filename]
+        unread = (
+            self._map_sizes[self.filename]
+            - self._read_files_offset[self.filename]
+        )
         length = min(size, unread)
 
         if self._url:
