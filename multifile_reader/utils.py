@@ -69,7 +69,9 @@ def get_online_file_size(url, headers=None):
     try:
         return int(size)
     except (TypeError, ValueError):
-        raise MultiFileReaderException("Size %s returned for file %s was not a valid number." % (size, url))
+        raise MultiFileReaderException(
+            "Size %s returned for file %s was not a valid number." % (size, url)
+        )
 
 
 def get_streamed_online_file(url, headers=None):

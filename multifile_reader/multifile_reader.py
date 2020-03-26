@@ -74,7 +74,9 @@ class MultiFileReader(object):
             current_file_path = self._files[self._file_idx]
             if is_url(current_file_path):
                 self._url = current_file_path
-                self._file = get_streamed_online_file(current_file_path, self._request_headers)
+                self._file = get_streamed_online_file(
+                    current_file_path, self._request_headers
+                )
             else:
                 self._url = None
                 self._file = open(current_file_path, "rb")
@@ -146,10 +148,7 @@ class MultiFileReader(object):
         return buf
 
     def _read(self, size):
-        unread = (
-            self._map_sizes[self.filename]
-            - self._read_files_offset[self.filename]
-        )
+        unread = self._map_sizes[self.filename] - self._read_files_offset[self.filename]
         length = min(size, unread)
 
         if self._url:
