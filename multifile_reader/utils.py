@@ -82,8 +82,8 @@ def get_online_file_size(url, headers=None):
 def get_streamed_online_file(url, headers=None):
     """Get online file without loading it whole in to memory.
 
-    Only starts accessing it once .read() method is called on the result of this
-    function.
+    Only starts accessing it once .read() method is called on the result of
+    this function.
 
     Args:
         url (str): location of the file
@@ -94,5 +94,6 @@ def get_streamed_online_file(url, headers=None):
     """
     response = make_streamed_get_request(url, headers)
 
-    # note: .raw does not handle decoding, but that is not an issue with binary data
+    # note: .raw does not handle decoding, but that is not an issue with
+    # binary data
     return response.raw
