@@ -58,4 +58,4 @@ class MultiFileReaderTestCase(TestCase):
         with MultiFileReader(self.files) as file_obj:
             self.assertEqual(file_obj.fileno(), -1)
             file_obj.nextfile()
-            self.assertEqual(file_obj.fileno(), 3)
+            self.assertGreater(file_obj.fileno(), 2)
