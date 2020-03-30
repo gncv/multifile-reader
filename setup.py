@@ -25,4 +25,5 @@ setup(
     "as if they are one",
     package_data={"multifile_reader": ["version/*"]},
     install_requires=["requests>=2.23.0", ],
+    tests_require=["pytest>=5.4", "tox>=3.14.5", ],
 )
