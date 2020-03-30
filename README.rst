@@ -28,7 +28,7 @@ Then in your code:
 
     from multifile_reader import MultiFileReader
 
-    files = ["path/to/local/file/foo", "path/to/local/file/bar"]
+    files = ["path/to/local/file/foo", "path/to/local/file/bar", "https://example.com/online/file"]
 
     with MultiFileReader(files) as file_obj:
         content_binary = file_obj.read()
@@ -42,7 +42,7 @@ Or to read big files in chunks:
 
     from multifile_reader import MultiFileReader
 
-    files = ["path/to/local/file/foo", "path/to/local/file/bar"]
+    files = ["path/to/local/file/foo", "path/to/local/file/bar", "https://example.com/online/file"]
 
     with MultiFileReader(files) as file_obj:
         chunk = file_obj.read(1)
